@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
     <script src="./script.js" defer></script>
-
 </head>
 
 <body>
@@ -27,7 +26,22 @@
         <input type="checkbox" id="read" name="read"><br>
         <input type="button" id="add-book" value="Submit">
     </form>
+    <table id="books-table">
+        <caption>Books</caption>
+        <thead id="table-header">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Read</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody id="display-books">
 
+        </tbody>
+
+    </table>
 
 
 </body>

@@ -1,18 +1,13 @@
 // array that will store all the book objects
 let myLibrary = [];
 
-
 // constructor to create book objects
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function () {
-        return `${title} by ${author}, ${pages} pages, ${read}`;
-    }
 }
-
 
 // function that takes the user's input from the form and adds the book to myLibrary array
 function addBookToLibrary() {
@@ -24,19 +19,40 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
 }
 
-// when the submit button on the form is clicked, the book is stored in an array
+// function for displaying the books in the table
+function displayBooks(myLibrary) {
+    const table = document.getElementById("display-books");
+    // for every book in myLibrary array
+    for (let book of myLibrary) {
+        // create a table row to store book info and add it to the table
+        let row = document.createElement("tr");
+        table.appendChild(row);
+        // for every property in a book object
+        for (let property in book) {
+            let cell = document.createElement("td");
+            cell.textContent = book[property];
+            row.appendChild(cell);
+        }
+    }
+}
+
+// function for cleaning the table 
+function clearTable() {
+    const tableBody = document.getElementById("display-books");
+    // while tableBody has children, remove the first one
+    while (tableBody.childNodes.length) {
+        tableBody.removeChild(tableBody.childNodes[0]);
+    }
+}
+
+// when the submit button on the form is clicked
+// the book is stored in an array
+// the table is clearead
+// the new table is displayed with the new book in it
 const submitBtn = document.getElementById("add-book");
 submitBtn.addEventListener('click', () => {
     addBookToLibrary();
+    clearTable();
+    displayBooks(myLibrary);
 })
-
-/*
-Function for displaying a book on a page:
-- loop through each object of the myLibrary array
-- create a container for the book (first figure out the layout of the books on the page)
-- populate the container with the book info
-*/
-
-
-
 
