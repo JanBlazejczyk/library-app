@@ -9,12 +9,21 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-// function that takes the user's input from the form and adds the book to myLibrary array
+// function that takes the user's input from the form
+// creates the new book object and pushes it into myLibrary array
 function addBookToLibrary() {
     const title = document.querySelector("#title").value;
     const author = document.querySelector("#author").value;
     const pages = document.querySelector("#pages").value;
-    const read = document.querySelector("#read").value;
+    // check if the checkbox is on and display a proper message
+    const checkbox = document.querySelector("#read");
+    let read = "";
+    if (checkbox.checked) {
+        read = "Read";
+    }
+    else {
+        read = "Not Read"
+    }
     const newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
 }
