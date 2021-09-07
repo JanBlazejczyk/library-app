@@ -33,8 +33,11 @@ function displayBooks(myLibrary) {
     const table = document.getElementById("display-books");
     // for every book in myLibrary array
     for (let book of myLibrary) {
+        let bookIndex = myLibrary.indexOf(book);
         // create a table row to store book info and add it to the table
         let row = document.createElement("tr");
+        // add a data-row-num atribute to the row with the index of the element in an array
+        row.setAttribute("data-row-num", bookIndex);
         table.appendChild(row);
         // for every property in a book object
         for (let property in book) {
@@ -42,7 +45,26 @@ function displayBooks(myLibrary) {
             cell.textContent = book[property];
             row.appendChild(cell);
         }
+        createDeleteButton(bookIndex, row);
     }
+}
+
+// takes book index which is then given as an data row num attribute
+// to associate the button with the row in the table
+function createDeleteButton(bookIndex, row) {
+    // add a placeholder for the delete button
+    // give it a specific class and append it to the table
+    let deleteBtnPlaceholder = document.createElement("td");
+    deleteBtnPlaceholder.classList.add("delete-btn-placeholder");
+    row.appendChild(deleteBtnPlaceholder);
+
+    // create a button give and it a data-row-num attribute associated with the row that it's in
+    // append the button to the placeholder
+    let deleteBtn = document.createElement("button");
+    deleteBtn.setAttribute("data-row-num", bookIndex);
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.textContent = "Delete";
+    deleteBtnPlaceholder.appendChild(deleteBtn);
 }
 
 // function for cleaning the table to display the current state of the table
@@ -53,6 +75,14 @@ function clearTable() {
         tableBody.removeChild(tableBody.childNodes[0]);
     }
 }
+
+// onclick function for all the delete-btn
+// it removes the given tr from the table
+const allDeleteBtns = document.querySelectorAll(".delete-btn")
+
+
+
+
 
 // when the submit button on the form is clicked
 // the book is stored in an array
