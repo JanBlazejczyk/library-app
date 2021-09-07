@@ -37,7 +37,7 @@ function displayBooks(myLibrary) {
         // create a table row to store book info and add it to the table
         let row = document.createElement("tr");
         // add a data-row-num atribute to the row with the index of the element in an array
-        row.setAttribute("data-row-num", bookIndex);
+        row.setAttribute("data-rowNum", bookIndex);
         table.appendChild(row);
         // for every property in a book object
         for (let property in book) {
@@ -61,7 +61,7 @@ function createDeleteButton(bookIndex, row) {
     // create a button give and it a data-row-num attribute associated with the row that it's in
     // append the button to the placeholder
     let deleteBtn = document.createElement("button");
-    deleteBtn.setAttribute("data-row-num", bookIndex);
+    deleteBtn.setAttribute("data-rowNum", bookIndex);
     deleteBtn.classList.add("delete-btn");
     deleteBtn.textContent = "Delete";
     deleteBtnPlaceholder.appendChild(deleteBtn);
@@ -76,14 +76,6 @@ function clearTable() {
     }
 }
 
-// onclick function for all the delete-btn
-// it removes the given tr from the table
-const allDeleteBtns = document.querySelectorAll(".delete-btn")
-
-
-
-
-
 // when the submit button on the form is clicked
 // the book is stored in an array
 // the table is clearead
@@ -94,4 +86,12 @@ submitBtn.addEventListener('click', () => {
     clearTable();
     displayBooks(myLibrary);
 })
+
+// onclick function for all the delete-btn
+// it removes the row from the table which has the same data-row-num attribute
+// as the clicked delete button
+let deleteButtonsAll = document.querySelectorAll(".delete-btn");
+deleteButtonsAll.forEach((button) => button.addEventListener('click', () => {
+    console.log("Works!");
+}))
 
