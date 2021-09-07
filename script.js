@@ -45,7 +45,7 @@ function displayBooks(myLibrary) {
     }
 }
 
-// function for cleaning the table 
+// function for cleaning the table to display the current state of the table
 function clearTable() {
     const tableBody = document.getElementById("display-books");
     // while tableBody has children, remove the first one
