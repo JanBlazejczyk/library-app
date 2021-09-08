@@ -11,65 +11,87 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="">
-    
+
 </head>
 
 <body>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-        Add a new book
-    </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                    Add a new book
+                </button>
+            </div>
 
-    <!-- Modal -->
-    <!-- Modal -->
-    <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add a new book</h5>
+            <!-- Modal -->
+            <!-- Modal -->
+            <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Add a new book</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <label for="title">Title:</label><br>
+                                <input type="text" id="title" name="title"><br>
+                                <label for="author">Author:</label><br>
+                                <input type="text" id="author" name="author"><br>
+                                <label for="pages">Pages:</label><br>
+                                <input type="text" id="pages" name="pages"><br>
+                                <label for="read">Read:</label>
+                                <input type="checkbox" id="read" name="read" value="read"><br>
+                                <!-- <input type="button" id="add-book" value="Submit"> -->
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="add-book" value="Submit"
+                                data-dismiss="modal">Add</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <label for="title">Title:</label><br>
-                        <input type="text" id="title" name="title"><br>
-                        <label for="author">Author:</label><br>
-                        <input type="text" id="author" name="author"><br>
-                        <label for="pages">Pages:</label><br>
-                        <input type="text" id="pages" name="pages"><br>
-                        <label for="read">Read:</label>
-                        <input type="checkbox" id="read" name="read" value="read"><br>
-                        <!-- <input type="button" id="add-book" value="Submit"> -->
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="add-book" value="Submit"
-                        data-dismiss="modal">Add</button>
-                </div>
+            </div>
+
+            <div class="col-9">
+                <!--Form for adding a new book to the library-->
+                <!--NOTE: it will be a pop out form-->
+                <table id="books-to-read-table" class="table table-striped">
+                    <h3>Books to read</h3>
+                    <thead id="table-header" class="thead-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Pages</th>
+                            <th>Read</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody class="display-books display-books-to-read">
+
+                    </tbody>
+                </table>
+
+                <table id="books-read-table" class="table table-striped">
+                    <h3>Books read</h3>
+                    <thead id="table-header" class="thead-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Pages</th>
+                            <th>Read</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody class="display-books display-books-read">
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-
-
-    <!--Form for adding a new book to the library-->
-    <!--NOTE: it will be a pop out form-->
-    <table id="books-table">
-        <caption>Books</caption>
-        <thead id="table-header">
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Pages</th>
-                <th>Read</th>
-                <th>Remove</th>
-            </tr>
-        </thead>
-        <tbody id="display-books">
-
-        </tbody>
-
-    </table>
 
     <!--Bootstrap scripts-->
     <script src="./script.js" defer></script>
