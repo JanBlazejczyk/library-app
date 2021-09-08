@@ -64,6 +64,7 @@ function displayBooks(books) {
             if (book.hasOwnProperty(property)) {
                 if (property === "read") {
                     let statusButton = document.createElement("button");
+                    statusBtn.setAttribute("data-index", bookIndex);
                     statusButton.classList.add("status-btn");
                     statusButton.textContent = "Finished it!";
                     cell.appendChild(statusButton);
@@ -128,28 +129,17 @@ submitBtn.addEventListener('click', () => {
     displayBooks(books);
 })
 
-// onclick function for all the delete-btn
-// it removes the row from the table which has the same data-row-num attribute
-// as the clicked delete button
-const booksToReadTableBody = document.querySelector(".display-books-to-read");
-booksToReadTableBody.addEventListener('click', (event) => {
+const tables = document.querySelector(".all-books");
+tables.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-btn')) {
-        let rowToRemove = document.querySelector(`[data-index="${event.target.dataset.index}"]`);
-        booksToReadTableBody.removeChild(rowToRemove);
-        // remove the book object displayed in the given row from myLibrary array to prevent it from displaying while adding another book
         books.splice(event.target.dataset.index, 1);
+        clearTable();
+        displayBooks(books);
     }
 })
 
-const booksReadTableBody = document.querySelector(".display-books-read");
-booksReadTableBody.addEventListener('click', (event) => {
-    if (event.target.classList.contains('delete-btn')) {
-        let rowToRemove = document.querySelector(`[data-index="${event.target.dataset.index}"]`);
-        booksReadTableBody.removeChild(rowToRemove);
-        // remove the book object displayed in the given row from myLibrary array to prevent it from displaying while adding another book
-        books.splice(event.target.dataset.index, 1);
-    }
-})
-
-
-
+// TODO event listener for status buttons
+// fires toggle status method on books[event.target.dataset.index]
+// fires switch arrays method on books[event.target.dataset.index]
+// clears table
+// displays books
