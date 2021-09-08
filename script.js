@@ -10,24 +10,38 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-// function that takes the user's input from the form
-// creates the new book object and pushes it into myLibrary array
-function addBookToLibrary() {
-    const title = document.querySelector("#title").value;
-    const author = document.querySelector("#author").value;
-    const pages = document.querySelector("#pages").value;
-    // depending on the value of the checkbox add book to different array
-    const checkbox = document.querySelector("#read");
-    let read = "";
-    const newBook = new Book(title, author, pages, read);
+Book.prototype.toggleStatus = function () {
+    if (this.read === "Read") {
+        this.read = "Not read";
+    }
+    else if (this.read === "Not read") {
+        this.read = "Read";
+    }
+}
+
+// both below functions would work instead of addBookToLibrary
+Book.prototype.addToArray = function () {
+    if (this.read === "Read") {
+        booksRead.push(this);
+    }
+    else if (this.read === "Not read") {
+        booksToRead.push(this);
+    }
+}
+
+function getBookFromForm() {
+    title = document.querySelector("#title").value;
+    author = document.querySelector("#author").value;
+    pages = document.querySelector("#pages").value;
+    let checkbox = document.querySelector("#read");
     if (checkbox.checked) {
-        newBook.read = "Read";
-        booksRead.push(newBook);
+        read = "Read";
     }
     else {
-        newBook.read = "Not Read";
-        booksToRead.push(newBook);
+        read = "Not read"
     }
+    const newBook = new Book(title, author, pages, read);
+    return newBook;
 }
 
 // function for displaying the books in the table
@@ -47,17 +61,21 @@ function displayBooks(booksRead, booksToRead) {
         // for every property in a book object
         for (let property in book) {
             let cell = document.createElement("td");
-            if (property === "read") {
-                let statusButton = document.createElement("button");
-                statusButton.classList.add("status-btn");
-                statusButton.textContent = "Finished it!";
-                cell.appendChild(statusButton);
-                row.appendChild(cell);
+            // iterate only properties of the constructor
+            if (book.hasOwnProperty(property)) {
+                if (property === "read") {
+                    let statusButton = document.createElement("button");
+                    statusButton.classList.add("status-btn");
+                    statusButton.textContent = "Finished it!";
+                    cell.appendChild(statusButton);
+                    row.appendChild(cell);
+                }
+                else {
+                    cell.textContent = book[property];
+                    row.appendChild(cell);
+                }
             }
-            else {
-                cell.textContent = book[property];
-                row.appendChild(cell);
-            }
+
         }
         createDeleteButton(bookIndex, row);
     }
@@ -69,17 +87,20 @@ function displayBooks(booksRead, booksToRead) {
 
         for (let property in book) {
             let cell = document.createElement("td");
-            if (property === "read") {
-                let statusButton = document.createElement("button");
-                statusButton.classList.add("status-btn");
-                statusButton.textContent = "Not finished?";
-                cell.appendChild(statusButton);
-                row.appendChild(cell);
+            if (book.hasOwnProperty(property)) {
+                if (property === "read") {
+                    let statusButton = document.createElement("button");
+                    statusButton.classList.add("status-btn");
+                    statusButton.textContent = "Not finished?";
+                    cell.appendChild(statusButton);
+                    row.appendChild(cell);
+                }
+                else {
+                    cell.textContent = book[property];
+                    row.appendChild(cell);
+                }
             }
-            else {
-                cell.textContent = book[property];
-                row.appendChild(cell);
-            }
+
         }
         createDeleteButton(bookIndex, row);
     }
@@ -106,8 +127,7 @@ function createDeleteButton(bookIndex, row) {
 // function for cleaning the table to display the current state of the table
 function clearTable() {
     const tableBodies = document.querySelectorAll(".display-books");
-    // TODO: needs to be for each
-    // while tableBody has children, remove the first one
+    // while any tableBody has children, remove them
     tableBodies.forEach((tableBody) => {
         while (tableBody.childNodes.length) {
             tableBody.removeChild(tableBody.childNodes[0]);
@@ -121,9 +141,13 @@ function clearTable() {
 // the new table is displayed with the new book in it
 const submitBtn = document.getElementById("add-book");
 submitBtn.addEventListener('click', () => {
-    addBookToLibrary();
+    // addBookToLibrary();
+    let newBook = getBookFromForm();
+    newBook.addToArray();
     clearTable();
     displayBooks(booksRead, booksToRead);
+    console.log(booksRead);
+    console.log(booksToRead);
 })
 
 // onclick function for all the delete-btn
