@@ -1,6 +1,5 @@
 // create two separate arrays for books read and books to read
-let booksToRead = [];
-let booksRead = [];
+let books = [];
 
 // constructor to create book objects
 function Book(title, author, pages, read) {
@@ -26,12 +25,7 @@ Book.prototype.switchArrays = function () {
 
 // Adds the book object to the correct array, depending on the status
 Book.prototype.addToArray = function () {
-    if (this.read === "Read") {
-        booksRead.push(this);
-    }
-    else if (this.read === "Not read") {
-        booksToRead.push(this);
-    }
+    books.push(this);
 }
 
 // gathers user's input from the form and returns the new book object
@@ -52,19 +46,17 @@ function getBookFromForm() {
 
 // function for displaying the books in the table
 // TODO check if it's possible to divide them based on the read property
-function displayBooks(booksRead, booksToRead) {
+function displayBooks(books) {
     let booksToReadPlaceholder = document.querySelector(".display-books-to-read");
     let booksReadPlaceholder = document.querySelector(".display-books-read");
 
     // for every book in booksToRead array
-    for (let book of booksToRead) {
-        let bookIndex = booksToRead.indexOf(book);
+    for (let book of books) {
+        let bookIndex = books.indexOf(book);
         // create a table row to store book info and add it to the table
         let row = document.createElement("tr");
-        // add a data-row-num atribute to the row with the index of the element in an array
-        // TODO: differentiate the data-readnum and data-toreadnum 
-        row.setAttribute("data-to-read-row-num", bookIndex);
-        booksToReadPlaceholder.appendChild(row);
+        // add a data atribute to the row with the index of the element in an array
+        row.setAttribute("data-index", bookIndex);
         // for every property in a book object
         for (let property in book) {
             let cell = document.createElement("td");
@@ -83,30 +75,12 @@ function displayBooks(booksRead, booksToRead) {
                 }
             }
         }
-        createDeleteButton(bookIndex, row);
-    }
-    for (let book of booksRead) {
-        let bookIndex = booksRead.indexOf(book);
-        let row = document.createElement("tr");
-        row.setAttribute("data-read-row-num", bookIndex);
-        booksReadPlaceholder.appendChild(row);
-
-        for (let property in book) {
-            let cell = document.createElement("td");
-            if (book.hasOwnProperty(property)) {
-                if (property === "read") {
-                    let statusButton = document.createElement("button");
-                    statusButton.classList.add("status-btn");
-                    statusButton.textContent = "Not finished?";
-                    cell.appendChild(statusButton);
-                    row.appendChild(cell);
-                }
-                else {
-                    cell.textContent = book[property];
-                    row.appendChild(cell);
-                }
-            }
-
+        // here stuff becomes different for read and not read 
+        if (book.read === "Read") {
+            booksReadPlaceholder.appendChild(row);
+        }
+        else if (book.read === "Not read") {
+            booksToReadPlaceholder.appendChild(row);
         }
         createDeleteButton(bookIndex, row);
     }
@@ -124,7 +98,7 @@ function createDeleteButton(bookIndex, row) {
     // create a button give and it a data-row-num attribute associated with the row that it's in
     // append the button to the placeholder
     let deleteBtn = document.createElement("button");
-    deleteBtn.setAttribute("data-rownum", bookIndex);
+    deleteBtn.setAttribute("data-index", bookIndex);
     deleteBtn.classList.add("delete-btn");
     deleteBtn.textContent = "Delete";
     deleteBtnPlaceholder.appendChild(deleteBtn);
@@ -151,9 +125,7 @@ submitBtn.addEventListener('click', () => {
     let newBook = getBookFromForm();
     newBook.addToArray();
     clearTable();
-    displayBooks(booksRead, booksToRead);
-    console.log(booksRead);
-    console.log(booksToRead);
+    displayBooks(books);
 })
 
 // onclick function for all the delete-btn
@@ -162,20 +134,20 @@ submitBtn.addEventListener('click', () => {
 const booksToReadTableBody = document.querySelector(".display-books-to-read");
 booksToReadTableBody.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-btn')) {
-        let rowToRemove = document.querySelector(`[data-to-read-row-num="${event.target.dataset.rownum}"]`);
+        let rowToRemove = document.querySelector(`[data-index="${event.target.dataset.index}"]`);
         booksToReadTableBody.removeChild(rowToRemove);
         // remove the book object displayed in the given row from myLibrary array to prevent it from displaying while adding another book
-        booksToRead.splice(event.target.dataset.rownum, 1);
+        books.splice(event.target.dataset.index, 1);
     }
 })
 
 const booksReadTableBody = document.querySelector(".display-books-read");
 booksReadTableBody.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-btn')) {
-        let rowToRemove = document.querySelector(`[data-read-row-num="${event.target.dataset.rownum}"]`);
+        let rowToRemove = document.querySelector(`[data-index="${event.target.dataset.index}"]`);
         booksReadTableBody.removeChild(rowToRemove);
         // remove the book object displayed in the given row from myLibrary array to prevent it from displaying while adding another book
-        booksRead.splice(event.target.dataset.rownum, 1);
+        books.splice(event.target.dataset.index, 1);
     }
 })
 
