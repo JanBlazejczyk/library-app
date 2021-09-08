@@ -1,6 +1,4 @@
-// TODO create two separate arrays for books read and books to read
-// array that will store all the book objects
-let myLibrary = [];
+// create two separate arrays for books read and books to read
 let booksToRead = [];
 let booksRead = [];
 
@@ -49,8 +47,17 @@ function displayBooks(booksRead, booksToRead) {
         // for every property in a book object
         for (let property in book) {
             let cell = document.createElement("td");
-            cell.textContent = book[property];
-            row.appendChild(cell);
+            if (property === "read") {
+                let statusButton = document.createElement("button");
+                statusButton.classList.add("status-btn");
+                statusButton.textContent = "Finished it!";
+                cell.appendChild(statusButton);
+                row.appendChild(cell);
+            }
+            else {
+                cell.textContent = book[property];
+                row.appendChild(cell);
+            }
         }
         createDeleteButton(bookIndex, row);
     }
@@ -62,8 +69,17 @@ function displayBooks(booksRead, booksToRead) {
 
         for (let property in book) {
             let cell = document.createElement("td");
-            cell.textContent = book[property];
-            row.appendChild(cell);
+            if (property === "read") {
+                let statusButton = document.createElement("button");
+                statusButton.classList.add("status-btn");
+                statusButton.textContent = "Not finished?";
+                cell.appendChild(statusButton);
+                row.appendChild(cell);
+            }
+            else {
+                cell.textContent = book[property];
+                row.appendChild(cell);
+            }
         }
         createDeleteButton(bookIndex, row);
     }
