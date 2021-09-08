@@ -45,7 +45,6 @@ function getBookFromForm() {
 }
 
 // function for displaying the books in the table
-// TODO check if it's possible to divide them based on the read property
 function displayBooks(books) {
     let booksToReadPlaceholder = document.querySelector(".display-books-to-read");
     let booksReadPlaceholder = document.querySelector(".display-books-read");
@@ -63,11 +62,17 @@ function displayBooks(books) {
             // iterate only properties of the constructor
             if (book.hasOwnProperty(property)) {
                 if (property === "read") {
-                    let statusButton = document.createElement("button");
+                    let statusBtn = document.createElement("button");
                     statusBtn.setAttribute("data-index", bookIndex);
-                    statusButton.classList.add("status-btn");
-                    statusButton.textContent = "Finished it!";
-                    cell.appendChild(statusButton);
+                    statusBtn.classList.add("status-btn");
+                    if (book.read === "Not read") {
+                        statusBtn.textContent = "Finished it!";
+                    }
+                    else if (book.read === "Read") {
+                        statusBtn.textContent = "Not finished?";
+                    }
+
+                    cell.appendChild(statusBtn);
                     row.appendChild(cell);
                 }
                 else {
@@ -133,6 +138,12 @@ const tables = document.querySelector(".all-books");
 tables.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-btn')) {
         books.splice(event.target.dataset.index, 1);
+        clearTable();
+        displayBooks(books);
+    }
+    else if (event.target.classList.contains('status-btn')) {
+        // book that is associated with this row has it's status changes
+        books[event.target.dataset.index].toggleStatus();
         clearTable();
         displayBooks(books);
     }
