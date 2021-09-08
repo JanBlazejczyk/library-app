@@ -19,7 +19,12 @@ Book.prototype.toggleStatus = function () {
     }
 }
 
-// both below functions would work instead of addBookToLibrary
+// if the book is stored in one of the book arrays it is removed from it and pushed to the second one
+Book.prototype.switchArrays = function () {
+
+}
+
+// Adds the book object to the correct array, depending on the status
 Book.prototype.addToArray = function () {
     if (this.read === "Read") {
         booksRead.push(this);
@@ -29,6 +34,7 @@ Book.prototype.addToArray = function () {
     }
 }
 
+// gathers user's input from the form and returns the new book object
 function getBookFromForm() {
     title = document.querySelector("#title").value;
     author = document.querySelector("#author").value;
@@ -45,11 +51,12 @@ function getBookFromForm() {
 }
 
 // function for displaying the books in the table
+// TODO check if it's possible to divide them based on the read property
 function displayBooks(booksRead, booksToRead) {
     let booksToReadPlaceholder = document.querySelector(".display-books-to-read");
     let booksReadPlaceholder = document.querySelector(".display-books-read");
 
-    // for every book in myLibrary array
+    // for every book in booksToRead array
     for (let book of booksToRead) {
         let bookIndex = booksToRead.indexOf(book);
         // create a table row to store book info and add it to the table
@@ -75,7 +82,6 @@ function displayBooks(booksRead, booksToRead) {
                     row.appendChild(cell);
                 }
             }
-
         }
         createDeleteButton(bookIndex, row);
     }
