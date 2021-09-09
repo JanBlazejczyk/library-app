@@ -9,6 +9,7 @@ body {
     background-color: #ee6c4d;
     height: 100vh;
     width: 40vw;
+    opacity: 0.8;
 }
 
 .all-books {
@@ -40,9 +41,11 @@ h3 {
     padding: 0.7rem;
     border-radius: 0.5em;
     font-family: 'Azeret Mono', monospace;
+    opacity: 0.8;
 }
 
 .delete-btn {
-    padding-left: 1.5rem;
+    padding-left: 1.4rem;
+    font-size: 1.2rem;
 }
 
