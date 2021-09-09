@@ -126,17 +126,62 @@ function clearTable() {
     })
 }
 
+// functions for stats
+function displayTotalBooks(books) {
+    let totalBooksStatPlaceholder = document.querySelector(".total-num");
+    totalBooksStatPlaceholder.innerHTML = books.length;
+}
+
+function displayBooksToRead(books) {
+    let booksToRead = 0;
+    for (let book of books) {
+        if (book.read === "Not read") {
+            booksToRead++
+        }
+    }
+    let booksToReadStatPlaceholder = document.querySelector(".to-read-num");
+    booksToReadStatPlaceholder.innerHTML = booksToRead;
+}
+
+function displayBooksRead(books) {
+    let booksRead = 0;
+    for (let book of books) {
+        if (book.read === "Read") {
+            booksRead++
+        }
+    }
+    let booksReadStatPlaceholder = document.querySelector(".read-num");
+    booksReadStatPlaceholder.innerHTML = booksRead;
+}
+
+function displayPagesRead(books) {
+    let pagesRead = 0;
+    for (book of books) {
+        if (book.read === "Read") {
+            pagesRead += Number(book.pages);
+        }
+    }
+    let pagesReadStatPlaceholder = document.querySelector(".pages-num");
+    pagesReadStatPlaceholder.innerHTML = pagesRead;
+    console.log(typeof pagesRead);
+}
+
 // when the submit button on the form is clicked
 // the new book object is created
 // the book is stored in an array
 // the current displaying table is clearead
 // the new table is displayed based on the new state of the array
+// the user's stats are displayed in the side bar
 const submitBtn = document.getElementById("add-book");
 submitBtn.addEventListener('click', () => {
     let newBook = getBookFromForm();
     newBook.addToArray();
     clearTable();
     displayBooks(books);
+    displayTotalBooks(books);
+    displayBooksToRead(books);
+    displayBooksRead(books);
+    displayPagesRead(books);
 })
 
 // event listener for clicking on status or delete icons
@@ -150,6 +195,12 @@ tables.addEventListener('click', (event) => {
         clearTable();
         // the new table is displayed based on the new state of the array
         displayBooks(books);
+        // the user's stats are displayed in the side bar
+        displayTotalBooks(books);
+        displayBooksToRead(books);
+        displayBooksRead(books);
+        displayPagesRead(books);
+
     }
     // clicking status icon
     else if (event.target.classList.contains('status-btn')) {
@@ -159,5 +210,10 @@ tables.addEventListener('click', (event) => {
         clearTable();
         // the new table is displayed based on the new state of the array
         displayBooks(books);
+        // the user's stats are displayed in the side bar
+        displayTotalBooks(books);
+        displayBooksToRead(books);
+        displayBooksRead(books);
+        displayPagesRead(books);
     }
 })
