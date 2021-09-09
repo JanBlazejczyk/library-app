@@ -42,3 +42,7 @@ h3 {
     font-family: 'Azeret Mono', monospace;
 }
 
+.delete-btn {
+    padding-left: 1.5rem;
+}
+

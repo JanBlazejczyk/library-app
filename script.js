@@ -96,13 +96,9 @@ function createDeleteButton(bookIndex, row) {
     deleteBtnPlaceholder.classList.add("delete-btn-placeholder");
     row.appendChild(deleteBtnPlaceholder);
 
-    // create a button give and it a data-row-num attribute associated with the row that it's in
-    // append the button to the placeholder
-    let deleteBtn = document.createElement("button");
-    deleteBtn.setAttribute("data-index", bookIndex);
-    deleteBtn.classList.add("delete-btn");
-    deleteBtn.textContent = "Delete";
-    deleteBtnPlaceholder.appendChild(deleteBtn);
+    // create an icon and give and it a data-row-num attribute associated with the row that it's in
+    deleteBtnPlaceholder.innerHTML = `<i class="bi bi-x-lg delete-btn" data-index="${bookIndex}"></i>`;
+
 }
 
 // function for cleaning the table to display the current state of the table
