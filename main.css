@@ -98,3 +98,18 @@ h3 {
     font-size: 1.2rem;
     cursor: pointer;
 }
+
+/* Modal window styling */
+.modal-header {
+    background-color: #EE6C4D;
+    color: #3D5A80;
+    border-radius: 0.5em;
+    font-family: 'Azeret Mono', monospace;
+    opacity: 0.8;
+}
+
+.modal-content {
+    background-color: #98C1D9;
+    border-radius: 0.5em;
+}
+
