@@ -18,11 +18,6 @@ Book.prototype.toggleStatus = function () {
     }
 }
 
-// if the book is stored in one of the book arrays it is removed from it and pushed to the second one
-Book.prototype.switchArrays = function () {
-
-}
-
 // Adds the book object to the correct array, depending on the status
 Book.prototype.addToArray = function () {
     books.push(this);
@@ -148,9 +143,3 @@ tables.addEventListener('click', (event) => {
         displayBooks(books);
     }
 })
-
-// TODO event listener for status buttons
-// fires toggle status method on books[event.target.dataset.index]
-// fires switch arrays method on books[event.target.dataset.index]
-// clears table
-// displays books

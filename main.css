@@ -1,0 +1,44 @@
+body {
+    display: flex;
+    background-color: #98C1D9;
+}
+
+.sidebar {
+    margin-right: 2rem;
+    padding: 1rem;
+    background-color: #ee6c4d;
+    height: 100vh;
+    width: 40vw;
+}
+
+.all-books {
+    width: 100%;
+    margin-right: 1rem;
+    background-color: #98C1D9;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-primary {
+    background-color: #98C1D9;
+    border-color: #98C1D9;
+}
+
+.table-title {
+    margin-top: 3rem;
+}
+
+#table-header {
+    border: none;
+    font-weight: 500;
+}
+
+h3 {
+    text-align: center;
+    background-color: #EE6C4D;
+    color: #3D5A80;
+    display: block;
+    padding: 0.7rem;
+    border-radius: 0.5em;
+    font-family: 'Azeret Mono', monospace;
+}
+
