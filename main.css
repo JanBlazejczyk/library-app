@@ -12,6 +12,7 @@ body {
     opacity: 0.8;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .logo {
@@ -31,13 +32,17 @@ body {
 }
 
 .stats-container {
-    margin-top: 1.8rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.2rem;
     font-weight: 500;
+    margin-bottom: 1.2rem;
+}
+
+.stats {
+    margin-top: 0.7rem;
 }
 
 .all-books {
@@ -48,8 +53,18 @@ body {
 }
 
 .btn-primary {
+    background-color: #3D5A80;
+    border-color: #3D5A80;
+    border-radius: 0.5em;
+    width: 13vw;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
     background-color: #98C1D9;
     border-color: #98C1D9;
+    color: #3D5A80;
 }
 
 .table-title {
