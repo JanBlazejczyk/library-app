@@ -163,7 +163,6 @@ function displayPagesRead(books) {
     }
     let pagesReadStatPlaceholder = document.querySelector(".pages-num");
     pagesReadStatPlaceholder.innerHTML = pagesRead;
-    console.log(typeof pagesRead);
 }
 
 // when the submit button on the form is clicked
@@ -174,14 +173,24 @@ function displayPagesRead(books) {
 // the user's stats are displayed in the side bar
 const submitBtn = document.getElementById("add-book");
 submitBtn.addEventListener('click', () => {
-    let newBook = getBookFromForm();
-    newBook.addToArray();
-    clearTable();
-    displayBooks(books);
-    displayTotalBooks(books);
-    displayBooksToRead(books);
-    displayBooksRead(books);
-    displayPagesRead(books);
+    title = document.querySelector("#title").value;
+    author = document.querySelector("#author").value;
+    pages = document.querySelector("#pages").value;
+    // work only with proper books that have title author and number o fpages
+    if (title !== "" && author !== "" && pages !== "") {
+        // if every condition is met the button closes the modal
+        submitBtn.setAttribute("data-dismiss", "modal");
+        let newBook = getBookFromForm();
+        newBook.addToArray();
+        clearTable();
+        displayBooks(books);
+        displayTotalBooks(books);
+        displayBooksToRead(books);
+        displayBooksRead(books);
+        displayPagesRead(books);
+    }
+
+
 })
 
 // event listener for clicking on status or delete icons
@@ -216,4 +225,16 @@ tables.addEventListener('click', (event) => {
         displayBooksRead(books);
         displayPagesRead(books);
     }
+})
+
+// prevents refreshing the page when the submit button is clicked on the form
+const form = document.querySelector(".add-book-form");
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+})
+
+// prevents closing of the modal when another book is added and any of the form fields is empty
+const openModalBtn = document.querySelector(".add-new");
+openModalBtn.addEventListener('click', () => {
+    submitBtn.removeAttribute("data-dismiss");
 })

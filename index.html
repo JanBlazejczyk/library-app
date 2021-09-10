@@ -42,7 +42,7 @@
         </div>
 
         <!-- Button to trigger the modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+        <button type="button" class="btn btn-primary add-new" data-toggle="modal" data-target="#staticBackdrop">
             Add new
         </button>
     </aside>
@@ -56,23 +56,25 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Add a new book</h5>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class="add-book-form">
                         <label for="title">Title</label><br>
-                        <input type="text" class="form-input" id="title" name="title"><br>
+                        <input type="text" class="form-input" id="title" name="title" maxlength="50" required=><br>
+                        <div class="title-warning"></div>
                         <label for="author">Author</label><br>
-                        <input type="text" class="form-input" id="author" name="author"><br>
+                        <input type="text" class="form-input" id="author" name="author" maxlength="50" required><br>
                         <label for="pages">Pages</label><br>
-                        <input type="text" class="form-input" id="pages" name="pages"><br>
+                        <input type="number" class="form-input" id="pages" name="pages" required><br>
                         <label for="read">Read</label>
                         <input type="checkbox" id="read" name="read" value="read"><br>
-                        <!-- <input type="button" id="add-book" value="Submit"> -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary modal-btn"
+                                data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary modal-btn" id="add-book"
+                                value="Submit">Submit</button>
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary modal-btn" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary modal-btn" id="add-book" value="Submit"
-                        data-dismiss="modal">Submit</button>
-                </div>
+
             </div>
         </div>
     </div>
