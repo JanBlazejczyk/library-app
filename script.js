@@ -1,6 +1,24 @@
 // create an array that will hold all the book objects
 let books = [];
 
+// if books are not in local storage set the item books to an empty array
+if (!localStorage.getItem('books')) {
+    books = [];
+    saveBooksToLocalStorage();
+}
+// if books are in the storage fetch them
+else {
+    const booksFromLocalStorage = JSON.parse(localStorage.getItem('books'));
+    books = booksFromLocalStorage;
+}
+
+function saveBooksToLocalStorage() {
+    localStorage.setItem('books', JSON.stringify(books));
+}
+
+// display the books each time the page is loaded
+window.addEventListener('load', displayBooks(books));
+
 // constructor to create book objects
 function Book(title, author, pages, read) {
     this.title = title;
@@ -182,6 +200,7 @@ submitBtn.addEventListener('click', () => {
         submitBtn.setAttribute("data-dismiss", "modal");
         let newBook = getBookFromForm();
         newBook.addToArray();
+        saveBooksToLocalStorage();
         clearTable();
         displayBooks(books);
         displayTotalBooks(books);
@@ -200,6 +219,7 @@ tables.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-btn')) {
         // removes the book which index is associated with the given row from books array
         books.splice(event.target.dataset.index, 1);
+        saveBooksToLocalStorage();
         // the current displaying table is clearead
         clearTable();
         // the new table is displayed based on the new state of the array
@@ -215,6 +235,7 @@ tables.addEventListener('click', (event) => {
     else if (event.target.classList.contains('status-btn')) {
         // book that is associated with this row has it's status changes
         books[event.target.dataset.index].toggleStatus();
+        saveBooksToLocalStorage();
         // the current displaying table is clearead
         clearTable();
         // the new table is displayed based on the new state of the array
