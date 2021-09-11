@@ -16,8 +16,13 @@ function saveBooksToLocalStorage() {
     localStorage.setItem('books', JSON.stringify(books));
 }
 
-// display the books each time the page is loaded
-window.addEventListener('load', displayBooks(books));
+window.addEventListener('load', () => {
+    displayBooks(books);
+    displayTotalBooks(books);
+    displayBooksToRead(books);
+    displayBooksRead(books);
+    displayPagesRead(books);
+})
 
 // constructor to create book objects
 function Book(title, author, pages, read) {
@@ -233,8 +238,6 @@ tables.addEventListener('click', (event) => {
     // clicking status icon
     else if (event.target.classList.contains('status-btn')) {
         // book that is associated with this row has it's status changes
-        console.log(books);
-        console.log(books[event.target.dataset.index]);
         toggleStatus(books[event.target.dataset.index]);
         saveBooksToLocalStorage();
         // the current displaying table is clearead
