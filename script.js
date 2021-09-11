@@ -27,19 +27,18 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-// changes the book status
-Book.prototype.toggleStatus = function () {
-    if (this.read === "Read") {
-        this.read = "Not read";
-    }
-    else if (this.read === "Not read") {
-        this.read = "Read";
-    }
-}
-
 // adds the book object to the books array
 Book.prototype.addToArray = function () {
     books.push(this);
+}
+
+function toggleStatus(book) {
+    if (book.read === "Read") {
+        book.read = "Not read";
+    }
+    else if (book.read === "Not read") {
+        book.read = "Read";
+    }
 }
 
 // gathers user's input from the form and returns the new book object
@@ -234,7 +233,9 @@ tables.addEventListener('click', (event) => {
     // clicking status icon
     else if (event.target.classList.contains('status-btn')) {
         // book that is associated with this row has it's status changes
-        books[event.target.dataset.index].toggleStatus();
+        console.log(books);
+        console.log(books[event.target.dataset.index]);
+        toggleStatus(books[event.target.dataset.index]);
         saveBooksToLocalStorage();
         // the current displaying table is clearead
         clearTable();
