@@ -237,4 +237,5 @@ form.addEventListener('submit', (event) => {
 const openModalBtn = document.querySelector(".add-new");
 openModalBtn.addEventListener('click', () => {
     submitBtn.removeAttribute("data-dismiss");
+    form.reset()
 })
