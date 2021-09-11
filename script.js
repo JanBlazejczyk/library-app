@@ -1,7 +1,7 @@
 // create an array that will hold all the book objects
 let books = [];
 
-// if books are not in local storage set the item books to an empty array
+// if books are not in local storage set the item books in localStorage to an empty array
 if (!localStorage.getItem('books')) {
     books = [];
     saveBooksToLocalStorage();
@@ -12,10 +12,12 @@ else {
     books = booksFromLocalStorage;
 }
 
+// saves current state of the books array in local storage
 function saveBooksToLocalStorage() {
     localStorage.setItem('books', JSON.stringify(books));
 }
 
+// each time the page loads books are displayed and stats updated
 window.addEventListener('load', () => {
     displayBooks(books);
     displayTotalBooks(books);
@@ -37,6 +39,7 @@ Book.prototype.addToArray = function () {
     books.push(this);
 }
 
+// changes the book status
 function toggleStatus(book) {
     if (book.read === "Read") {
         book.read = "Not read";
