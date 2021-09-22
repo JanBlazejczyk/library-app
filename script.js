@@ -26,17 +26,18 @@ window.addEventListener('load', () => {
     displayPagesRead(books);
 })
 
-// constructor to create book objects
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
+// book class
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-// adds the book object to the books array
-Book.prototype.addToArray = function () {
-    books.push(this);
+    addToArray() {
+        books.push(this);
+    }
 }
 
 // changes the book status
