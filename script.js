@@ -202,7 +202,7 @@ submitBtn.addEventListener('click', () => {
     title = document.querySelector("#title").value;
     author = document.querySelector("#author").value;
     pages = document.querySelector("#pages").value;
-    // work only with proper books that have title author and number o fpages
+    // work only with proper books
     if (title !== "" && author !== "" && pages !== "") {
         // if every condition is met the button closes the modal
         submitBtn.setAttribute("data-dismiss", "modal");
@@ -216,8 +216,6 @@ submitBtn.addEventListener('click', () => {
         displayBooksRead(books);
         displayPagesRead(books);
     }
-
-
 })
 
 // event listener for clicking on status or delete icons
