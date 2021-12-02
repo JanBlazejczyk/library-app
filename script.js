@@ -53,9 +53,11 @@ function toggleStatus(book) {
 
 // gathers user's input from the form and returns the new book object
 function getBookFromForm() {
-    title = document.querySelector("#title").value;
-    author = document.querySelector("#author").value;
-    pages = document.querySelector("#pages").value;
+    let title = document.querySelector("#title").value;
+    let author = document.querySelector("#author").value;
+    let pages = document.querySelector("#pages").value;
+    let priority = document.querySelector("#priority");
+    let category = document.querySelector("#category");
     // if the "Read" checkbox in the form is checked the correct status is assigned
     let checkbox = document.querySelector("#read");
     if (checkbox.checked) {
@@ -64,7 +66,7 @@ function getBookFromForm() {
     else {
         read = "Not read"
     }
-    const newBook = new Book(title, author, pages, read);
+    const newBook = new Book(title, author, pages, priority, category, read);
     return newBook;
 }
 
