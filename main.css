@@ -181,3 +181,7 @@ form {
 .form-input:focus {
     border: 0.2rem solid #293241;
 }
+
+.form-priority-container {
+    display: flex;
+}

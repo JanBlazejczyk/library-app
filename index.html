@@ -58,12 +58,29 @@
         <div class="modal-body">
           <form class="add-book-form">
             <label for="title">Title</label><br>
-            <input type="text" class="form-input" id="title" name="title" maxlength="50" required=><br>
+            <input type="text" class="form-input" id="title" name="title" minlength="3" maxlength="50" required=><br>
             <div class="title-warning"></div>
             <label for="author">Author</label><br>
-            <input type="text" class="form-input" id="author" name="author" maxlength="50" required><br>
+            <input type="text" class="form-input" id="author" name="author" minlength="3" maxlength="50" required><br>
             <label for="pages">Pages</label><br>
             <input type="number" class="form-input" id="pages" name="pages" required><br>
+            <!--Priority-->
+            <label for="priority">Priority</label>
+            <select name="priority" id="priority" class="form-input">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <!--Category-->
+            <label for="category">Category</label>
+            <select name="category" id="category" class="form-input">
+              <option value="business">Business</option>
+              <option value="self-growth">Self growth</option>
+              <option value="fiction">Fiction</option>
+            </select>
+
             <label for="read">Read</label>
             <input type="checkbox" id="read" name="read" value="read"><br>
             <div class="modal-footer">
