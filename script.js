@@ -28,13 +28,14 @@ window.addEventListener('load', () => {
 
 // book class
 class Book {
-    constructor(title, author, pages, read) {
+    constructor(title, author, pages, priority, category, read) {
         this.title = title;
         this.author = author;
         this.pages = pages;
+        this.priority = priority;
+        this.category = category;
         this.read = read;
     }
-
     addToArray() {
         books.push(this);
     }
